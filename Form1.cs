@@ -1,3 +1,4 @@
+using System.DirectoryServices.ActiveDirectory;
 using System.Numerics;
 
 namespace Shoot_Out_Game_MOO_ICT
@@ -6,15 +7,24 @@ namespace Shoot_Out_Game_MOO_ICT
     {
 
         bool goLeft, goRight, goUp, goDown, gameOver;
+        bool vida50Apareceu = false;
+        bool vida20Apareceu = false;
         string facing = "up";
         int playerHealth = 100;
         int speed = 10;
         int ammo = 10;
+        int varivel = 30;
         int zombieSpeed = 3;
         Random randNum = new Random();
         int score;
         List<PictureBox> zombiesList = new List<PictureBox>();
+        private object e;
 
+
+
+       
+
+        //fazer menu explicando todas as fases;
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +36,19 @@ namespace Shoot_Out_Game_MOO_ICT
             if (playerHealth > 1)
             {
                 healthBar.Value = playerHealth;
+                // se o jogador tiver menos de 50 de vida e vida nao tiver aparecido, dropa imagem vida
+                if (playerHealth <= 50 && vida50Apareceu == false)
+                {
+                    DropVida();
+                    vida50Apareceu = true;
+                }
+                // se o jogador tiver menos de 20 de vida e vida nao tiver aparecido, dropa imagem vida
+
+                if (playerHealth <= 20 && vida20Apareceu == false)
+                {
+                    DropVida();
+                    vida20Apareceu = true;
+            }
             }
             else
             {
@@ -35,8 +58,6 @@ namespace Shoot_Out_Game_MOO_ICT
                 lblGameOver.Visible = true;
             }
 
-            txtAmmo.Text = "Ammo: " + ammo;
-            txtScore.Text = "Kills: " + score;
 
             if (goLeft == true && player.Left > 0)
             {
@@ -69,6 +90,29 @@ namespace Shoot_Out_Game_MOO_ICT
 
                     }
                 }
+
+
+                // logica de quando surge a imagem e da 30 de vida ao jogador, mas nao pode passar de 100 de vida
+
+                if (x is PictureBox && (string)x.Tag == "vida")
+                {
+                    if (player.Bounds.IntersectsWith(x.Bounds))
+                    {
+                        this.Controls.Remove(x);
+                        ((PictureBox)x).Dispose();
+
+                        playerHealth += 30;
+
+                        if (playerHealth > 100)
+                        {
+                            playerHealth = 100;
+                    }
+
+                }
+                }
+
+
+
 
 
                 if (x is PictureBox && (string)x.Tag == "zombie")
@@ -119,6 +163,24 @@ namespace Shoot_Out_Game_MOO_ICT
                             ((PictureBox)x).Dispose();
                             zombiesList.Remove(((PictureBox)x));
                             MakeZombies();
+
+                            //se vc matar 15 zombies, a fase 1 ta ganha
+                            if (score >= 15)
+
+                            {
+                                foreach (PictureBox zombie in zombiesList)
+                                {
+                                    this.Controls.Remove(zombie);
+                                    zombie.Dispose();
+                                }
+
+                                zombiesList.Clear();
+                                GameTimer.Stop();
+                                MessageBox.Show("Fase 1 concluída! Fase 2 iniciando...");
+                                //mensagem explicando a fase dois
+                                Fase2();
+                            }
+
                         }
                     }
                 }
@@ -251,6 +313,68 @@ namespace Shoot_Out_Game_MOO_ICT
 
         }
 
+        // Função para dropar vida quando o jogador estiver com menos de 50 ou 20 de vida
+        private void DropVida()
+        {
+            PictureBox vida = new PictureBox();
+
+            vida.Tag = "vida";
+            vida.Image = Properties.Resources.ammo_Image; //mudar para imagem de vida
+            vida.SizeMode = PictureBoxSizeMode.AutoSize;
+
+            // Posição aleatória dentro do campo
+            vida.Left = randNum.Next(
+                10,
+                this.ClientSize.Width - vida.Width
+            );
+
+            vida.Top = randNum.Next(
+                60,
+                this.ClientSize.Height - vida.Height
+            );
+
+            this.Controls.Add(vida);
+
+            vida.BringToFront();
+            player.BringToFront();
+        }
+
+        private void DropArame()
+        {
+            PictureBox arame = new PictureBox();
+            arame.Image = Properties.Resources.arame; //pegar imagem do arame
+            arame.SizeMode = PictureBoxSizeMode.AutoSize;
+            arame.Left = randNum.Next(10, this.ClientSize.Width - arame.Width);
+            arame.Top = randNum.Next(60, this.ClientSize.Height - arame.Height);
+            arame.Tag = "arame";
+            this.Controls.Add(arame);
+            arame.BringToFront();
+            player.BringToFront();
+        }
+
+        private void Fase2()
+        {
+
+            //dropar 3 arames na arena se apertar e
+            int arames = 3;
+
+            for (int i = 0; i < 3; i++)
+            {
+                MakeZombies();
+            }
+
+            if (e.KeyCode == Keys.E && arames > 0 && gameOver == false)
+            {
+                DropArame();
+
+            }
+
+        }
+
+
+
+
+
         private void RestartGame()
         {
             player.Image = Properties.Resources.up;
@@ -268,6 +392,8 @@ namespace Shoot_Out_Game_MOO_ICT
                 MakeZombies();
             }
 
+
+
             goUp = false;
             goDown = false;
             goLeft = false;
@@ -278,9 +404,17 @@ namespace Shoot_Out_Game_MOO_ICT
             score = 0;
             ammo = 10;
 
+
+            // Resetar as flags de vida como ainda n usadas
+            vida50Apareceu = false;
+            vida20Apareceu = false;
+
             GameTimer.Start();
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
 
     }
+}
 }
