@@ -33,6 +33,7 @@ namespace Shoot_Out_Game_MOO_ICT
             InitializeComponent();
             RestartGame();
             painelFase2.Visible = false;
+            txtArames.Visible = false;
         }
 
 
@@ -494,11 +495,36 @@ namespace Shoot_Out_Game_MOO_ICT
 
 
         // FASE 2
+        // FASE 2
         private void Fase2()
         {
             fase2Ativa = true;
 
             arames = 3;
+
+            txtArames.Visible = true;
+            txtArames.Text = "Arames: " + arames;
+
+            // Mostra a mensagem
+            labelMensagemTeclaE.Visible = true;
+
+            // Timer da mensagem
+            System.Windows.Forms.Timer timerMensagem =
+                new System.Windows.Forms.Timer();
+
+            timerMensagem.Interval = 4000; // 
+
+            timerMensagem.Tick += (sender, e) =>
+            {
+                labelMensagemTeclaE.Visible = false;
+
+                timerMensagem.Stop();
+                timerMensagem.Dispose();
+            };
+
+            // INICIA O TIMER
+            timerMensagem.Start();
+
 
             for (int i = 0; i < 3; i++)
             {

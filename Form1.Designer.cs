@@ -41,6 +41,8 @@
             painelFase2 = new Panel();
             buttonContinuar = new Button();
             labelFase2Comacando = new Label();
+            txtArames = new Label();
+            labelMensagemTeclaE = new Label();
             ((System.ComponentModel.ISupportInitialize)player).BeginInit();
             painelFase2.SuspendLayout();
             SuspendLayout();
@@ -49,7 +51,7 @@
             // 
             txtAmmo.AutoSize = true;
             txtAmmo.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtAmmo.ForeColor = Color.White;
+            txtAmmo.ForeColor = Color.DarkOrange;
             txtAmmo.Location = new Point(15, 15);
             txtAmmo.Margin = new Padding(4, 0, 4, 0);
             txtAmmo.Name = "txtAmmo";
@@ -61,7 +63,7 @@
             // 
             txtScore.AutoSize = true;
             txtScore.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtScore.ForeColor = Color.White;
+            txtScore.ForeColor = Color.DarkOrange;
             txtScore.Location = new Point(430, 15);
             txtScore.Margin = new Padding(4, 0, 4, 0);
             txtScore.Name = "txtScore";
@@ -168,12 +170,36 @@
             // 
             labelFase2Comacando.AutoSize = true;
             labelFase2Comacando.Font = new Font("BankGothic Lt BT", 18F);
-            labelFase2Comacando.ForeColor = Color.Coral;
+            labelFase2Comacando.ForeColor = Color.DarkOrange;
             labelFase2Comacando.Location = new Point(167, 143);
             labelFase2Comacando.Name = "labelFase2Comacando";
             labelFase2Comacando.Size = new Size(368, 25);
             labelFase2Comacando.TabIndex = 5;
             labelFase2Comacando.Text = "A fase 2 está começando...";
+            // 
+            // txtArames
+            // 
+            txtArames.AutoSize = true;
+            txtArames.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtArames.ForeColor = Color.DarkOrange;
+            txtArames.Location = new Point(209, 17);
+            txtArames.Margin = new Padding(4, 0, 4, 0);
+            txtArames.Name = "txtArames";
+            txtArames.Size = new Size(104, 24);
+            txtArames.TabIndex = 6;
+            txtArames.Text = "Arames: 3";
+            // 
+            // labelMensagemTeclaE
+            // 
+            labelMensagemTeclaE.AutoSize = true;
+            labelMensagemTeclaE.Font = new Font("BankGothic Md BT", 15F);
+            labelMensagemTeclaE.ForeColor = SystemColors.ButtonFace;
+            labelMensagemTeclaE.Location = new Point(197, 95);
+            labelMensagemTeclaE.Name = "labelMensagemTeclaE";
+            labelMensagemTeclaE.Size = new Size(662, 21);
+            labelMensagemTeclaE.TabIndex = 7;
+            labelMensagemTeclaE.Text = "Pressione a tecla E para ativar lançar arame pela arena";
+            labelMensagemTeclaE.Visible = false;
             // 
             // Form1
             // 
@@ -181,6 +207,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(1078, 763);
+            Controls.Add(labelMensagemTeclaE);
+            Controls.Add(txtArames);
             Controls.Add(painelFase2);
             Controls.Add(lblGameOver);
             Controls.Add(label2);
@@ -217,5 +245,7 @@
         private Panel painelFase2;
         private Label labelFase2Comacando;
         private Button buttonContinuar;
+        private Label txtArames;
+        private Label labelMensagemTeclaE;
     }
 }
