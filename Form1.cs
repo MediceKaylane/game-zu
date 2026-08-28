@@ -44,7 +44,7 @@ namespace Shoot_Out_Game_MOO_ICT
                 {
                     DropVida();
                     vida20Apareceu = true;
-                }
+            }
             }
             else
             {
@@ -53,8 +53,6 @@ namespace Shoot_Out_Game_MOO_ICT
                 GameTimer.Stop();
             }
 
-            txtAmmo.Text = "Balas: " + ammo;
-            txtScore.Text = "Mortes: " + score;
 
             if (goLeft == true && player.Left > 0)
             {
@@ -103,9 +101,9 @@ namespace Shoot_Out_Game_MOO_ICT
                         if (playerHealth > 100)
                         {
                             playerHealth = 100;
-                        }
-
                     }
+
+                }
                 }
 
 
@@ -411,6 +409,6 @@ namespace Shoot_Out_Game_MOO_ICT
         private void label2_Click(object sender, EventArgs e)
         {
 
-        }
     }
+}
 }
