@@ -13,7 +13,8 @@ namespace Shoot_Out_Game_MOO_ICT
         int playerHealth = 100;
         int speed = 10;
         int ammo = 10;
-        int varivel = 30;
+        int varivelteste = 30;
+        //teteee
         int zombieSpeed = 3;
         Random randNum = new Random();
         int score;
@@ -339,18 +340,10 @@ namespace Shoot_Out_Game_MOO_ICT
             player.BringToFront();
         }
 
-        private void DropArame()
-        {
-            PictureBox arame = new PictureBox();
-            arame.Image = Properties.Resources.arame; //pegar imagem do arame
-            arame.SizeMode = PictureBoxSizeMode.AutoSize;
-            arame.Left = randNum.Next(10, this.ClientSize.Width - arame.Width);
-            arame.Top = randNum.Next(60, this.ClientSize.Height - arame.Height);
-            arame.Tag = "arame";
-            this.Controls.Add(arame);
-            arame.BringToFront();
-            player.BringToFront();
-        }
+        //private void DropArame()
+        //{
+            
+       // }
 
         private void Fase2()
         {
@@ -363,11 +356,8 @@ namespace Shoot_Out_Game_MOO_ICT
                 MakeZombies();
             }
 
-            if (e.KeyCode == Keys.E && arames > 0 && gameOver == false)
-            {
-                DropArame();
-
-            }
+            //if (e.KeyCode == Keys.E && arames > 0 && gameOver == false)
+           
 
         }
 
