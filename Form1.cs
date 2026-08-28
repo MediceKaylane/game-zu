@@ -21,14 +21,15 @@ namespace Shoot_Out_Game_MOO_ICT
 
 
 
-       
+
 
         //fazer menu explicando todas as fases;
         public Form1()
         {
             InitializeComponent();
             RestartGame();
-           
+            painelFase2.Visible = false;
+
         }
 
         private void MainTimerEvent(object sender, EventArgs e)
@@ -48,7 +49,7 @@ namespace Shoot_Out_Game_MOO_ICT
                 {
                     DropVida();
                     vida20Apareceu = true;
-            }
+                }
             }
             else
             {
@@ -111,9 +112,9 @@ namespace Shoot_Out_Game_MOO_ICT
                         if (playerHealth > 100)
                         {
                             playerHealth = 100;
-                    }
+                        }
 
-                }
+                    }
                 }
 
 
@@ -170,7 +171,7 @@ namespace Shoot_Out_Game_MOO_ICT
                             MakeZombies();
 
                             //se vc matar 15 zombies, a fase 1 ta ganha
-                            if (score >= 8)
+                            if (score >= 2)
 
                             {
                                 foreach (PictureBox zombie in zombiesList)
@@ -181,8 +182,9 @@ namespace Shoot_Out_Game_MOO_ICT
 
                                 zombiesList.Clear();
                                 GameTimer.Stop();
-                                MessageBox.Show("Fase 1 concluída! Fase 2 iniciando...");
-                                //mensagem explicando a fase dois
+
+                                painelFase2.Visible = true;
+
                                 Fase2();
                             }
 
@@ -347,8 +349,8 @@ namespace Shoot_Out_Game_MOO_ICT
 
         //private void DropArame()
         //{
-            
-       // }
+
+        // }
 
         private void Fase2()
         {
@@ -362,7 +364,7 @@ namespace Shoot_Out_Game_MOO_ICT
             }
 
             //if (e.KeyCode == Keys.E && arames > 0 && gameOver == false)
-           
+
 
         }
 
@@ -410,6 +412,19 @@ namespace Shoot_Out_Game_MOO_ICT
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonContinuar_Click(object sender, EventArgs e)
+        {
+            painelFase2.Visible = false;
+            painelFase2.BringToFront();
+            player.Visible = true;
+            Fase2();
+            GameTimer.Start();
+            this.ActiveControl = null;
+            this.Focus();
+
+
+        }
     }
-}
 }

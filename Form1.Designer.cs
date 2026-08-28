@@ -37,7 +37,12 @@
             GameTimer = new System.Windows.Forms.Timer(components);
             label2 = new Label();
             lblGameOver = new Label();
+            labelFase1Concluida = new Label();
+            painelFase2 = new Panel();
+            buttonContinuar = new Button();
+            labelFase2Comacando = new Label();
             ((System.ComponentModel.ISupportInitialize)player).BeginInit();
+            painelFase2.SuspendLayout();
             SuspendLayout();
             // 
             // txtAmmo
@@ -45,10 +50,10 @@
             txtAmmo.AutoSize = true;
             txtAmmo.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtAmmo.ForeColor = Color.White;
-            txtAmmo.Location = new Point(17, 20);
+            txtAmmo.Location = new Point(15, 15);
             txtAmmo.Margin = new Padding(4, 0, 4, 0);
             txtAmmo.Name = "txtAmmo";
-            txtAmmo.Size = new Size(114, 29);
+            txtAmmo.Size = new Size(93, 24);
             txtAmmo.TabIndex = 0;
             txtAmmo.Text = "Ammo: 0";
             // 
@@ -57,10 +62,10 @@
             txtScore.AutoSize = true;
             txtScore.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtScore.ForeColor = Color.White;
-            txtScore.Location = new Point(491, 20);
+            txtScore.Location = new Point(430, 15);
             txtScore.Margin = new Padding(4, 0, 4, 0);
             txtScore.Name = "txtScore";
-            txtScore.Size = new Size(92, 29);
+            txtScore.Size = new Size(71, 24);
             txtScore.TabIndex = 0;
             txtScore.Text = "Kills: 0";
             // 
@@ -69,27 +74,28 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(857, 20);
+            label1.Location = new Point(750, 15);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(102, 29);
+            label1.Size = new Size(82, 24);
             label1.TabIndex = 0;
             label1.Text = "Health: ";
             // 
             // healthBar
             // 
-            healthBar.Location = new Point(967, 20);
-            healthBar.Margin = new Padding(4, 5, 4, 5);
+            healthBar.Location = new Point(846, 15);
+            healthBar.Margin = new Padding(4);
             healthBar.Name = "healthBar";
-            healthBar.Size = new Size(249, 35);
+            healthBar.Size = new Size(218, 26);
             healthBar.TabIndex = 1;
             healthBar.Value = 100;
             // 
             // player
             // 
+            player.BackColor = Color.FromArgb(64, 64, 64);
             player.Image = Properties.Resources.up;
-            player.Location = new Point(569, 725);
-            player.Margin = new Padding(4, 5, 4, 5);
+            player.Location = new Point(498, 544);
+            player.Margin = new Padding(4);
             player.Name = "player";
             player.Size = new Size(71, 100);
             player.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -106,26 +112,76 @@
             // 
             label2.Location = new Point(0, 0);
             label2.Name = "label2";
-            label2.Size = new Size(100, 23);
+            label2.Size = new Size(88, 17);
             label2.TabIndex = 0;
             // 
             // lblGameOver
             // 
             lblGameOver.AutoSize = true;
+            lblGameOver.Font = new Font("BankGothic Md BT", 30F);
             lblGameOver.ForeColor = SystemColors.ButtonFace;
-            lblGameOver.Location = new Point(439, 231);
+            lblGameOver.Location = new Point(86, 360);
             lblGameOver.Name = "lblGameOver";
-            lblGameOver.Size = new Size(260, 20);
+            lblGameOver.Size = new Size(904, 41);
             lblGameOver.TabIndex = 3;
             lblGameOver.Text = "Pressione enter para jogar novamente";
             lblGameOver.Visible = false;
             // 
+            // labelFase1Concluida
+            // 
+            labelFase1Concluida.AutoSize = true;
+            labelFase1Concluida.Font = new Font("BankGothic Md BT", 35F);
+            labelFase1Concluida.ForeColor = Color.Orange;
+            labelFase1Concluida.Location = new Point(77, 34);
+            labelFase1Concluida.Name = "labelFase1Concluida";
+            labelFase1Concluida.Size = new Size(577, 49);
+            labelFase1Concluida.TabIndex = 4;
+            labelFase1Concluida.Text = "FASE 1 CONCLUÍDA!";
+            labelFase1Concluida.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // painelFase2
+            // 
+            painelFase2.BackColor = Color.Black;
+            painelFase2.BorderStyle = BorderStyle.FixedSingle;
+            painelFase2.Controls.Add(buttonContinuar);
+            painelFase2.Controls.Add(labelFase2Comacando);
+            painelFase2.Controls.Add(labelFase1Concluida);
+            painelFase2.Location = new Point(197, 156);
+            painelFase2.Name = "painelFase2";
+            painelFase2.Size = new Size(712, 360);
+            painelFase2.TabIndex = 5;
+            // 
+            // buttonContinuar
+            // 
+            buttonContinuar.BackColor = SystemColors.ButtonFace;
+            buttonContinuar.Font = new Font("BankGothic Md BT", 12F);
+            buttonContinuar.ForeColor = Color.DarkOrange;
+            buttonContinuar.Location = new Point(271, 222);
+            buttonContinuar.Name = "buttonContinuar";
+            buttonContinuar.Size = new Size(151, 62);
+            buttonContinuar.TabIndex = 6;
+            buttonContinuar.Text = "CONTINUAR";
+            buttonContinuar.UseVisualStyleBackColor = false;
+            buttonContinuar.Click += buttonContinuar_Click;
+            // 
+            // labelFase2Comacando
+            // 
+            labelFase2Comacando.AutoSize = true;
+            labelFase2Comacando.Font = new Font("BankGothic Lt BT", 18F);
+            labelFase2Comacando.ForeColor = Color.Coral;
+            labelFase2Comacando.Location = new Point(167, 143);
+            labelFase2Comacando.Name = "labelFase2Comacando";
+            labelFase2Comacando.Size = new Size(368, 25);
+            labelFase2Comacando.TabIndex = 5;
+            labelFase2Comacando.Text = "A fase 2 está começando...";
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(1232, 1017);
+            ClientSize = new Size(1078, 763);
+            Controls.Add(painelFase2);
             Controls.Add(lblGameOver);
             Controls.Add(label2);
             Controls.Add(player);
@@ -133,12 +189,14 @@
             Controls.Add(label1);
             Controls.Add(txtScore);
             Controls.Add(txtAmmo);
-            Margin = new Padding(4, 5, 4, 5);
+            Margin = new Padding(4);
             Name = "Form1";
             Text = "Zombie Shootout Game MOO ICT";
             KeyDown += KeyIsDown;
             KeyUp += KeyIsUp;
             ((System.ComponentModel.ISupportInitialize)player).EndInit();
+            painelFase2.ResumeLayout(false);
+            painelFase2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
 
@@ -155,5 +213,9 @@
         private System.Windows.Forms.Timer GameTimer;
         private Label label2;
         private Label lblGameOver;
+        private Label labelFase1Concluida;
+        private Panel painelFase2;
+        private Label labelFase2Comacando;
+        private Button buttonContinuar;
     }
 }
