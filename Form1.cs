@@ -601,5 +601,8 @@ namespace Shoot_Out_Game_MOO_ICT
             this.ActiveControl = null;
             this.Focus();
         }
+
+
+        
     }
 }
