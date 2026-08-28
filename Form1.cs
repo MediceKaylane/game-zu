@@ -13,12 +13,16 @@ namespace Shoot_Out_Game_MOO_ICT
         int playerHealth = 100;
         int speed = 10;
         int ammo = 10;
+        int varivelaletoria = 40;
         int zombieSpeed = 3;
         Random randNum = new Random();
         int score;
         List<PictureBox> zombiesList = new List<PictureBox>();
         private object e;
 
+
+
+       
 
         //fazer menu explicando todas as fases;
         public Form1()
