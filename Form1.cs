@@ -9,46 +9,53 @@ namespace Shoot_Out_Game_MOO_ICT
         bool goLeft, goRight, goUp, goDown, gameOver;
         bool vida50Apareceu = false;
         bool vida20Apareceu = false;
+        bool fase2Ativa = false;
+
         string facing = "up";
+
         int playerHealth = 100;
         int speed = 10;
         int ammo = 10;
         int zombieSpeed = 3;
+        int arames = 3;
+
         Random randNum = new Random();
         int score;
+
         List<PictureBox> zombiesList = new List<PictureBox>();
-        private object e;
 
 
 
 
-
-        //fazer menu explicando todas as fases;
+        // fazer menu explicando todas as fases;
         public Form1()
         {
             InitializeComponent();
             RestartGame();
             painelFase2.Visible = false;
-
         }
+
 
         private void MainTimerEvent(object sender, EventArgs e)
         {
             if (playerHealth > 1)
             {
                 healthBar.Value = playerHealth;
-                // se o jogador tiver menos de 50 de vida e vida nao tiver aparecido, dropa imagem vida
-                if (playerHealth <= 50 && vida50Apareceu == false)
-                {
-                    DropVida();
-                    vida50Apareceu = true;
-                }
-                // se o jogador tiver menos de 20 de vida e vida nao tiver aparecido, dropa imagem vida
 
-                if (playerHealth <= 20 && vida20Apareceu == false)
+                // VIDA SÓ APARECE NA FASE 1
+                if (fase2Ativa == false)
                 {
-                    DropVida();
-                    vida20Apareceu = true;
+                    if (playerHealth <= 50 && vida50Apareceu == false)
+                    {
+                        DropVida();
+                        vida50Apareceu = true;
+                    }
+
+                    if (playerHealth <= 20 && vida20Apareceu == false)
+                    {
+                        DropVida();
+                        vida20Apareceu = true;
+                    }
                 }
             }
             else
@@ -60,7 +67,6 @@ namespace Shoot_Out_Game_MOO_ICT
             }
 
 
-
             txtAmmo.Text = "Balas: " + ammo;
             txtScore.Text = "Mortes: " + score;
 
@@ -69,14 +75,17 @@ namespace Shoot_Out_Game_MOO_ICT
             {
                 player.Left -= speed;
             }
+
             if (goRight == true && player.Left + player.Width < this.ClientSize.Width)
             {
                 player.Left += speed;
             }
+
             if (goUp == true && player.Top > 45)
             {
                 player.Top -= speed;
             }
+
             if (goDown == true && player.Top + player.Height < this.ClientSize.Height)
             {
                 player.Top += speed;
@@ -93,12 +102,11 @@ namespace Shoot_Out_Game_MOO_ICT
                         this.Controls.Remove(x);
                         ((PictureBox)x).Dispose();
                         ammo += 5;
-
                     }
                 }
 
 
-                // logica de quando surge a imagem e da 30 de vida ao jogador, mas nao pode passar de 100 de vida
+                // lógica da vida
 
                 if (x is PictureBox && (string)x.Tag == "vida")
                 {
@@ -113,17 +121,14 @@ namespace Shoot_Out_Game_MOO_ICT
                         {
                             playerHealth = 100;
                         }
-
                     }
                 }
 
 
-
-
+                // ZUMBIS
 
                 if (x is PictureBox && (string)x.Tag == "zombie")
                 {
-
                     if (player.Bounds.IntersectsWith(x.Bounds))
                     {
                         playerHealth -= 1;
@@ -135,29 +140,36 @@ namespace Shoot_Out_Game_MOO_ICT
                         x.Left -= zombieSpeed;
                         ((PictureBox)x).Image = Properties.Resources.zleft;
                     }
+
                     if (x.Left < player.Left)
                     {
                         x.Left += zombieSpeed;
                         ((PictureBox)x).Image = Properties.Resources.zright;
                     }
+
                     if (x.Top > player.Top)
                     {
                         x.Top -= zombieSpeed;
                         ((PictureBox)x).Image = Properties.Resources.zup;
                     }
+
                     if (x.Top < player.Top)
                     {
                         x.Top += zombieSpeed;
                         ((PictureBox)x).Image = Properties.Resources.zdown;
                     }
-
                 }
 
 
 
+                // BALA MATA ZUMBI
+
                 foreach (Control j in this.Controls)
                 {
-                    if (j is PictureBox && (string)j.Tag == "bullet" && x is PictureBox && (string)x.Tag == "zombie")
+                    if (j is PictureBox &&
+                        (string)j.Tag == "bullet" &&
+                        x is PictureBox &&
+                        (string)x.Tag == "zombie")
                     {
                         if (x.Bounds.IntersectsWith(j.Bounds))
                         {
@@ -165,14 +177,17 @@ namespace Shoot_Out_Game_MOO_ICT
 
                             this.Controls.Remove(j);
                             ((PictureBox)j).Dispose();
+
                             this.Controls.Remove(x);
                             ((PictureBox)x).Dispose();
-                            zombiesList.Remove(((PictureBox)x));
+
+                            zombiesList.Remove((PictureBox)x);
+
                             MakeZombies();
 
-                            //se vc matar 15 zombies, a fase 1 ta ganha
-                            if (score >= 2)
 
+                            // Fase 1 termina com 2 mortes
+                            if (score >= 2 && fase2Ativa == false)
                             {
                                 foreach (PictureBox zombie in zombiesList)
                                 {
@@ -181,30 +196,58 @@ namespace Shoot_Out_Game_MOO_ICT
                                 }
 
                                 zombiesList.Clear();
+
                                 GameTimer.Stop();
 
                                 painelFase2.Visible = true;
+                                painelFase2.BringToFront();
 
-                                Fase2();
+                                player.Visible = false;
                             }
-
                         }
                     }
                 }
 
 
+                // ARAME MATA ZUMBI
+                if (x is PictureBox && (string)x.Tag == "arame")
+                {
+                    foreach (Control z in this.Controls)
+                    {
+                        if (z is PictureBox && (string)z.Tag == "zombie")
+                        {
+                            if (x.Bounds.IntersectsWith(z.Bounds))
+                            {
+                                score++;
+
+                                this.Controls.Remove(z);
+                                ((PictureBox)z).Dispose();
+
+                                zombiesList.Remove((PictureBox)z);
+
+                                MakeZombies();
+
+                                // Remove o arame depois de matar o zumbi
+                                this.Controls.Remove(x);
+                                ((PictureBox)x).Dispose();
+
+                                break;
+                            }
+                        }
+                    }
+                }
+
             }
-
-
         }
+
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-
             if (gameOver == true)
             {
                 return;
             }
+
 
             if (e.KeyCode == Keys.Left)
             {
@@ -233,10 +276,8 @@ namespace Shoot_Out_Game_MOO_ICT
                 facing = "down";
                 player.Image = Properties.Resources.down;
             }
-
-
-
         }
+
 
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
@@ -260,11 +301,13 @@ namespace Shoot_Out_Game_MOO_ICT
                 goDown = false;
             }
 
+
+            // ATIRAR
             if (e.KeyCode == Keys.Space && ammo > 0 && gameOver == false)
             {
                 ammo--;
-                ShootBullet(facing);
 
+                ShootBullet(facing);
 
                 if (ammo < 1)
                 {
@@ -272,65 +315,99 @@ namespace Shoot_Out_Game_MOO_ICT
                 }
             }
 
+
+            // ARAME - SOMENTE NA FASE 2
+            if (e.KeyCode == Keys.E &&
+                fase2Ativa == true &&
+                arames > 0 &&
+                gameOver == false)
+            {
+                DropArame();
+            }
+
+
+            // REINICIAR
             if (e.KeyCode == Keys.Enter && gameOver == true)
             {
                 RestartGame();
             }
-
         }
+
 
         private void ShootBullet(string direction)
         {
             Bullet shootBullet = new Bullet();
+
             shootBullet.direction = direction;
+
             shootBullet.bulletLeft = player.Left + (player.Width / 2);
             shootBullet.bulletTop = player.Top + (player.Height / 2);
+
             shootBullet.MakeBullet(this);
         }
+
 
         private void MakeZombies()
         {
             PictureBox zombie = new PictureBox();
+
             zombie.Tag = "zombie";
             zombie.Image = Properties.Resources.zdown;
+
             zombie.Left = randNum.Next(0, 900);
             zombie.Top = randNum.Next(0, 800);
-            zombie.SizeMode = PictureBoxSizeMode.AutoSize;
-            zombiesList.Add(zombie);
-            this.Controls.Add(zombie);
-            player.BringToFront();
 
+            zombie.SizeMode = PictureBoxSizeMode.AutoSize;
+
+            zombiesList.Add(zombie);
+
+            this.Controls.Add(zombie);
+
+            player.BringToFront();
         }
+
 
         private void DropAmmo()
         {
-
             PictureBox ammo = new PictureBox();
+
             ammo.Image = Properties.Resources.ammo_Image;
+
             ammo.SizeMode = PictureBoxSizeMode.AutoSize;
-            ammo.Left = randNum.Next(10, this.ClientSize.Width - ammo.Width);
-            ammo.Top = randNum.Next(60, this.ClientSize.Height - ammo.Height);
+
+            ammo.Left = randNum.Next(
+                10,
+                this.ClientSize.Width - ammo.Width
+            );
+
+            ammo.Top = randNum.Next(
+                60,
+                this.ClientSize.Height - ammo.Height
+            );
+
             ammo.Tag = "ammo";
+
             this.Controls.Add(ammo);
 
             ammo.BringToFront();
             player.BringToFront();
-
-
-
         }
 
-        // Função para dropar vida quando o jogador estiver com menos de 50 ou 20 de vida
+
+        // DROPA VIDA
         private void DropVida()
         {
             PictureBox vida = new PictureBox();
 
             vida.Tag = "vida";
-            vida.Image = Properties.Resources.coracao; //mudar para imagem de vida
+
+            vida.Image = Properties.Resources.coracao;
+
             vida.Size = new Size(40, 40);
+
             vida.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            // Posição aleatória dentro do campo
+
             vida.Left = randNum.Next(
                 10,
                 this.ClientSize.Width - vida.Width
@@ -341,41 +418,105 @@ namespace Shoot_Out_Game_MOO_ICT
                 this.ClientSize.Height - vida.Height
             );
 
+
             this.Controls.Add(vida);
 
             vida.BringToFront();
             player.BringToFront();
         }
 
-        //private void DropArame()
-        //{
 
-        // }
+        // DROP ARAME
+        private void DropArame()
+        {
+            if (arames <= 0)
+            {
+                return;
+            }
 
+
+            PictureBox arame = new PictureBox();
+
+            arame.Tag = "arame";
+
+            arame.Image = Properties.Resources.arame; //trocar para imagem do arame
+
+            arame.Size = new Size(80, 80);
+
+            arame.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+            // posição aleatória na arena
+            arame.Left = randNum.Next(
+                10,
+                this.ClientSize.Width - arame.Width
+            );
+
+            arame.Top = randNum.Next(
+                60,
+                this.ClientSize.Height - arame.Height
+            );
+
+
+            this.Controls.Add(arame);
+
+            arame.BringToFront();
+
+            player.BringToFront();
+
+
+            // diminui quantidade de arames
+            arames--;
+
+
+            // timer de 5 segundos
+            System.Windows.Forms.Timer timerArame =
+                new System.Windows.Forms.Timer();
+
+            timerArame.Interval = 10000; // 10 segundos na arena o arame
+
+
+            timerArame.Tick += (sender, e) =>
+            {
+                if (!arame.IsDisposed)
+                {
+                    this.Controls.Remove(arame);
+                    arame.Dispose();
+                }
+
+                timerArame.Stop();
+                timerArame.Dispose();
+            };
+
+
+            timerArame.Start();
+        }
+
+
+        // FASE 2
         private void Fase2()
         {
+            fase2Ativa = true;
 
-            //dropar 3 arames na arena se apertar e
-            int arames = 3;
+            arames = 3;
 
             for (int i = 0; i < 3; i++)
             {
                 MakeZombies();
             }
-
-            //if (e.KeyCode == Keys.E && arames > 0 && gameOver == false)
-
-
         }
-
-
-
 
 
         private void RestartGame()
         {
             player.Image = Properties.Resources.up;
+
             lblGameOver.Visible = false;
+
+            painelFase2.Visible = false;
+
+            player.Visible = true;
+
 
             foreach (PictureBox i in zombiesList)
             {
@@ -384,47 +525,55 @@ namespace Shoot_Out_Game_MOO_ICT
 
             zombiesList.Clear();
 
+
             for (int i = 0; i < 3; i++)
             {
                 MakeZombies();
             }
 
 
-
             goUp = false;
             goDown = false;
             goLeft = false;
             goRight = false;
+
             gameOver = false;
 
             playerHealth = 100;
             score = 0;
             ammo = 10;
 
+            arames = 3;
 
-            // Resetar as flags de vida como ainda n usadas
+            fase2Ativa = false;
+
+
             vida50Apareceu = false;
             vida20Apareceu = false;
 
+
             GameTimer.Start();
         }
+
 
         private void label2_Click(object sender, EventArgs e)
         {
 
         }
 
+
         private void buttonContinuar_Click(object sender, EventArgs e)
         {
             painelFase2.Visible = false;
-            painelFase2.BringToFront();
+
             player.Visible = true;
+
             Fase2();
+
             GameTimer.Start();
+
             this.ActiveControl = null;
             this.Focus();
-
-
         }
     }
 }
