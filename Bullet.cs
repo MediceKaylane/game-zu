@@ -13,7 +13,7 @@ namespace Shoot_Out_Game_MOO_ICT
     internal class Bullet
     {
 
-        public string direction;
+        public string direction = "";
         public int bulletLeft;
         public int bulletTop;
 

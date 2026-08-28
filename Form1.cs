@@ -32,6 +32,7 @@ namespace Shoot_Out_Game_MOO_ICT
                 gameOver = true;
                 player.Image = Properties.Resources.dead;
                 GameTimer.Stop();
+                lblGameOver.Visible = true;
             }
 
             txtAmmo.Text = "Ammo: " + ammo;
@@ -253,6 +254,7 @@ namespace Shoot_Out_Game_MOO_ICT
         private void RestartGame()
         {
             player.Image = Properties.Resources.up;
+            lblGameOver.Visible = false;
 
             foreach (PictureBox i in zombiesList)
             {
