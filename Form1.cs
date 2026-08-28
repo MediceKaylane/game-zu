@@ -13,7 +13,7 @@ namespace Shoot_Out_Game_MOO_ICT
         int playerHealth = 100;
         int speed = 10;
         int ammo = 10;
-        int varivelaletoria = 40;
+        int varivel = 30;
         int zombieSpeed = 3;
         Random randNum = new Random();
         int score;
