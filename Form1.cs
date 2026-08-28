@@ -13,8 +13,6 @@ namespace Shoot_Out_Game_MOO_ICT
         int playerHealth = 100;
         int speed = 10;
         int ammo = 10;
-        int varivelteste = 30;
-        //teteee
         int zombieSpeed = 3;
         Random randNum = new Random();
         int score;
@@ -30,6 +28,7 @@ namespace Shoot_Out_Game_MOO_ICT
         {
             InitializeComponent();
             RestartGame();
+           
         }
 
         private void MainTimerEvent(object sender, EventArgs e)
@@ -58,6 +57,11 @@ namespace Shoot_Out_Game_MOO_ICT
                 GameTimer.Stop();
                 lblGameOver.Visible = true;
             }
+
+
+
+            txtAmmo.Text = "Balas: " + ammo;
+            txtScore.Text = "Mortes: " + score;
 
 
             if (goLeft == true && player.Left > 0)
@@ -166,7 +170,7 @@ namespace Shoot_Out_Game_MOO_ICT
                             MakeZombies();
 
                             //se vc matar 15 zombies, a fase 1 ta ganha
-                            if (score >= 15)
+                            if (score >= 8)
 
                             {
                                 foreach (PictureBox zombie in zombiesList)
@@ -320,8 +324,9 @@ namespace Shoot_Out_Game_MOO_ICT
             PictureBox vida = new PictureBox();
 
             vida.Tag = "vida";
-            vida.Image = Properties.Resources.ammo_Image; //mudar para imagem de vida
-            vida.SizeMode = PictureBoxSizeMode.AutoSize;
+            vida.Image = Properties.Resources.coracao; //mudar para imagem de vida
+            vida.Size = new Size(40, 40);
+            vida.SizeMode = PictureBoxSizeMode.StretchImage;
 
             // Posição aleatória dentro do campo
             vida.Left = randNum.Next(
