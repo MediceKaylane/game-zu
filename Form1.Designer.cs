@@ -38,8 +38,6 @@
             titulomenu = new Label();
             txtArames = new Label();
             painelcomojogar = new Panel();
-            pictureBox2 = new PictureBox();
-            pictureBox1 = new PictureBox();
             botaovoltar = new Button();
             explicacao01 = new Label();
             imagemteclas = new PictureBox();
@@ -61,8 +59,6 @@
             labelFase3 = new Label();
             painelmenu.SuspendLayout();
             painelcomojogar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imagemteclas).BeginInit();
             painelFase2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)player).BeginInit();
@@ -152,8 +148,6 @@
             // 
             // painelcomojogar
             // 
-            painelcomojogar.Controls.Add(pictureBox2);
-            painelcomojogar.Controls.Add(pictureBox1);
             painelcomojogar.Controls.Add(botaovoltar);
             painelcomojogar.Controls.Add(explicacao01);
             painelcomojogar.Controls.Add(imagemteclas);
@@ -163,22 +157,6 @@
             painelcomojogar.Size = new Size(1199, 974);
             painelcomojogar.TabIndex = 9;
             painelcomojogar.Visible = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Location = new Point(0, 0);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(100, 50);
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(100, 50);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
             // 
             // botaovoltar
             // 
@@ -198,11 +176,12 @@
             explicacao01.AutoSize = true;
             explicacao01.Font = new Font("Showcard Gothic", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             explicacao01.ForeColor = Color.FromArgb(255, 128, 0);
+            explicacao01.ImageAlign = ContentAlignment.BottomRight;
             explicacao01.Location = new Point(204, 242);
             explicacao01.Name = "explicacao01";
-            explicacao01.Size = new Size(734, 26);
+            explicacao01.Size = new Size(982, 234);
             explicacao01.TabIndex = 2;
-            explicacao01.Text = "Utilize as teclas para se movimentar e pressione espaço para atirar";
+            explicacao01.Text = resources.GetString("explicacao01.Text");
             // 
             // imagemteclas
             // 
@@ -215,7 +194,7 @@
             // titulocomojogar
             // 
             titulocomojogar.AutoSize = true;
-            titulocomojogar.Font = new Font("Showcard Gothic", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            titulocomojogar.Font = new Font("Showcard Gothic", 48F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             titulocomojogar.ForeColor = Color.FromArgb(255, 128, 0);
             titulocomojogar.Location = new Point(304, 74);
             titulocomojogar.Name = "titulocomojogar";
@@ -384,6 +363,7 @@
             buttonFase3.TabIndex = 1;
             buttonFase3.Text = "Continuar para fase 3";
             buttonFase3.UseVisualStyleBackColor = false;
+            buttonFase3.Click += buttonFase3_Click;
             // 
             // labelFase3
             // 
@@ -422,8 +402,6 @@
             painelmenu.PerformLayout();
             painelcomojogar.ResumeLayout(false);
             painelcomojogar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)imagemteclas).EndInit();
             painelFase2.ResumeLayout(false);
             painelFase2.PerformLayout();
@@ -443,8 +421,6 @@
         private Button iniciarjogo;
         private Label titulomenu;
         private Panel painelcomojogar;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
         private Button botaovoltar;
         private Label explicacao01;
         private PictureBox imagemteclas;

@@ -26,6 +26,7 @@ namespace Shoot_Out_Game_MOO_ICT
         Random randNum = new Random();
         int score;
         int scoreInicioFase2 = 0;
+        int scoreInicioFase3 = 0;
 
         List<PictureBox> zombiesList = new List<PictureBox>();
 
@@ -192,6 +193,8 @@ namespace Shoot_Out_Game_MOO_ICT
                                 panelFase3.BringToFront();
 
                                 player.Visible = false;
+
+                                return;
                             }
 
                             this.Controls.Remove(j);
@@ -205,8 +208,8 @@ namespace Shoot_Out_Game_MOO_ICT
                             MakeZombies();
 
 
-                            // Fase 1 termina com 2 mortes
-                            if (score >= 2 && fase2Ativa == false)
+                            // Fase 1 termina com 5 mortes
+                            if (score >= 5 && fase2Ativa == false && fase3Ativa == false)
                             {
                                 foreach (PictureBox zombie in zombiesList)
                                 {
@@ -563,16 +566,22 @@ namespace Shoot_Out_Game_MOO_ICT
 
         private void Fase3()
         {
+            fase2Ativa = false;
             fase3Ativa = true;
-
+            scoreInicioFase3 = score;
             tempoFase3 = 20;
 
+            if (lblTempoFase3.Parent != this)
+                this.Controls.Add(lblTempoFase3);
+
+            lblTempoFase3.BringToFront();
             lblTempoFase3.Visible = true;
+            txtAmmo.Visible = false;
             lblTempoFase3.Text = "Tempo: " + tempoFase3;
 
             timerFase3.Start();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 4; i++)
             {
                 MakeZombies();
             }
