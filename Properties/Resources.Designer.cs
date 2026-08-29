@@ -69,7 +69,25 @@ namespace Shoot_Out_Game_MOO_ICT.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
+        internal static System.Drawing.Bitmap coracao
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("coracao", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap arame
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("arame", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
