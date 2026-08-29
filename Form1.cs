@@ -1,5 +1,6 @@
 using System.DirectoryServices.ActiveDirectory;
 using System.Numerics;
+using System.Linq;
 
 namespace Shoot_Out_Game_MOO_ICT
 {
@@ -66,6 +67,7 @@ namespace Shoot_Out_Game_MOO_ICT
                 player.Image = Properties.Resources.dead;
                 GameTimer.Stop();
                 lblGameOver.Visible = true;
+
             }
 
 
@@ -95,7 +97,7 @@ namespace Shoot_Out_Game_MOO_ICT
 
 
 
-            foreach (Control x in this.Controls)
+            foreach (Control x in this.Controls.Cast<Control>().ToList())
             {
                 if (x is PictureBox && (string)x.Tag == "ammo")
                 {
@@ -166,7 +168,7 @@ namespace Shoot_Out_Game_MOO_ICT
 
                 // BALA MATA ZUMBI
 
-                foreach (Control j in this.Controls)
+                foreach (Control j in this.Controls.Cast<Control>().ToList())
                 {
                     if (j is PictureBox &&
                         (string)j.Tag == "bullet" &&
@@ -342,8 +344,16 @@ namespace Shoot_Out_Game_MOO_ICT
 
             shootBullet.direction = direction;
 
-            shootBullet.bulletLeft = player.Left + (player.Width / 2);
-            shootBullet.bulletTop = player.Top + (player.Height / 2);
+            int offsetX = 0;
+            int offsetY = 0;
+
+            if (direction == "left") offsetX = -player.Width;
+            if (direction == "right") offsetX = player.Width;
+            if (direction == "up") offsetY = -player.Height;
+            if (direction == "down") offsetY = player.Height;
+
+            shootBullet.bulletLeft = player.Left + (player.Width / 2) + offsetX;
+            shootBullet.bulletTop = player.Top + (player.Height / 2) + offsetY;
 
             shootBullet.MakeBullet(this);
         }

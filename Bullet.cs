@@ -18,6 +18,8 @@ namespace Shoot_Out_Game_MOO_ICT
         public int bulletTop;
 
         private int speed = 20;
+
+        private Form gameForm;
         private PictureBox bullet = new PictureBox();
         private Timer bulletTimer = new Timer();
 
@@ -30,9 +32,11 @@ namespace Shoot_Out_Game_MOO_ICT
             bullet.Tag = "bullet";
             bullet.Left = bulletLeft;
             bullet.Top = bulletTop;
-            bullet.BringToFront();
+            gameForm = form;
+
 
             form.Controls.Add(bullet);
+            bullet.BringToFront();
 
 
             bulletTimer.Interval = speed;
@@ -65,7 +69,8 @@ namespace Shoot_Out_Game_MOO_ICT
             }
 
 
-            if (bullet.Left < 10 || bullet.Left > 860 || bullet.Top < 10 || bullet.Top > 600)
+            if (bullet.Left < 0 || bullet.Left > gameForm.ClientSize.Width ||
+                bullet.Top < 40 || bullet.Top > gameForm.ClientSize.Height)
             {
                 bulletTimer.Stop();
                 bulletTimer.Dispose();

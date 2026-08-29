@@ -47,13 +47,13 @@
             buttonContinuar = new Button();
             labelFase2Comacando = new Label();
             labelFase1Concluida = new Label();
-            lblGameOver = new Label();
             healthBar = new ProgressBar();
             player = new PictureBox();
             label1 = new Label();
             txtScore = new Label();
             txtAmmo = new Label();
             labelMensagemTeclaE = new Label();
+            lblGameOver = new Label();
             painelmenu.SuspendLayout();
             painelcomojogar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -211,7 +211,6 @@
             painelFase2.Controls.Add(buttonContinuar);
             painelFase2.Controls.Add(labelFase2Comacando);
             painelFase2.Controls.Add(labelFase1Concluida);
-            painelFase2.Controls.Add(lblGameOver);
             painelFase2.Location = new Point(210, 269);
             painelFase2.Margin = new Padding(3, 4, 3, 4);
             painelFase2.Name = "painelFase2";
@@ -254,18 +253,6 @@
             labelFase1Concluida.TabIndex = 4;
             labelFase1Concluida.Text = "FASE 1 CONCLUÍDA!";
             labelFase1Concluida.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // lblGameOver
-            // 
-            lblGameOver.AutoSize = true;
-            lblGameOver.Font = new Font("Microsoft Sans Serif", 30F);
-            lblGameOver.ForeColor = SystemColors.ButtonFace;
-            lblGameOver.Location = new Point(-30, 234);
-            lblGameOver.Name = "lblGameOver";
-            lblGameOver.Size = new Size(877, 58);
-            lblGameOver.TabIndex = 19;
-            lblGameOver.Text = "Pressione enter para jogar novamente";
-            lblGameOver.Visible = false;
             // 
             // healthBar
             // 
@@ -342,6 +329,18 @@
             labelMensagemTeclaE.Text = "Pressione E para usar arame";
             labelMensagemTeclaE.Visible = false;
             // 
+            // lblGameOver
+            // 
+            lblGameOver.AutoSize = true;
+            lblGameOver.Font = new Font("Microsoft Sans Serif", 30F);
+            lblGameOver.ForeColor = SystemColors.ButtonFace;
+            lblGameOver.Location = new Point(178, 200);
+            lblGameOver.Name = "lblGameOver";
+            lblGameOver.Size = new Size(877, 58);
+            lblGameOver.TabIndex = 27;
+            lblGameOver.Text = "Pressione enter para jogar novamente";
+            lblGameOver.Visible = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -349,6 +348,7 @@
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(1232, 1017);
             Controls.Add(healthBar);
+            Controls.Add(lblGameOver);
             Controls.Add(label1);
             Controls.Add(txtScore);
             Controls.Add(txtAmmo);
@@ -398,10 +398,10 @@
         private ProgressBar healthBar;
         private Label txtArames;
         private PictureBox player;
-        private Label lblGameOver;
         private Label label1;
         private Label txtScore;
         private Label txtAmmo;
         private Label labelMensagemTeclaE;
+        private Label lblGameOver;
     }
 }
