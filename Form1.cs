@@ -342,7 +342,7 @@ namespace Shoot_Out_Game_MOO_ICT
         private void DropArame()
         {
             PictureBox arame = new PictureBox();
-            arame.Image = Properties.Resources.arame; //pegar imagem do arame
+            //arame.Image = Properties.Resources.arame; //pegar imagem do arame
             arame.SizeMode = PictureBoxSizeMode.AutoSize;
             arame.Left = randNum.Next(10, this.ClientSize.Width - arame.Width);
             arame.Top = randNum.Next(60, this.ClientSize.Height - arame.Height);
@@ -363,11 +363,11 @@ namespace Shoot_Out_Game_MOO_ICT
                 MakeZombies();
             }
 
-            if (e.KeyCode == Keys.E && arames > 0 && gameOver == false)
-            {
-                DropArame();
+           // if (e.KeyCode == Keys.E && arames > 0 && gameOver == false)
+           // {
+             //   DropArame();
 
-            }
+            //}
 
         }
 
