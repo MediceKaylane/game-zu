@@ -12,6 +12,8 @@ namespace Shoot_Out_Game_MOO_ICT
         bool vida20Apareceu = false;
         bool fase2Ativa = false;
 
+        bool fase3Ativa = false;
+
         string facing = "up";
 
         int playerHealth = 100;
@@ -19,9 +21,11 @@ namespace Shoot_Out_Game_MOO_ICT
         int ammo = 10;
         int zombieSpeed = 3;
         int arames = 3;
+        int tempoFase3 = 20;
 
         Random randNum = new Random();
         int score;
+        int scoreInicioFase2 = 0;
 
         List<PictureBox> zombiesList = new List<PictureBox>();
 
@@ -179,6 +183,17 @@ namespace Shoot_Out_Game_MOO_ICT
                         {
                             score++;
 
+                            if (fase2Ativa && score - scoreInicioFase2 >= 15)
+                            {
+                                GameTimer.Stop();
+
+                                painelFase2.Visible = false;
+                                panelFase3.Visible = true;
+                                panelFase3.BringToFront();
+
+                                player.Visible = false;
+                            }
+
                             this.Controls.Remove(j);
                             ((PictureBox)j).Dispose();
 
@@ -307,9 +322,12 @@ namespace Shoot_Out_Game_MOO_ICT
 
 
             // ATIRAR
-            if (e.KeyCode == Keys.Space && ammo > 0 && gameOver == false)
+            if (e.KeyCode == Keys.Space && (ammo > 0 || fase3Ativa) && gameOver == false)
             {
-                ammo--;
+                if (!fase3Ativa)
+                {
+                    ammo--;
+                }
 
                 ShootBullet(facing);
 
@@ -504,13 +522,11 @@ namespace Shoot_Out_Game_MOO_ICT
             timerArame.Start();
         }
 
-
-        // FASE 2
         // FASE 2
         private void Fase2()
         {
             fase2Ativa = true;
-
+            scoreInicioFase2 = score;
             arames = 3;
 
             txtArames.Visible = true;
@@ -538,6 +554,25 @@ namespace Shoot_Out_Game_MOO_ICT
 
 
             for (int i = 0; i < 3; i++)
+            {
+                MakeZombies();
+            }
+        }
+
+        // FASE 3
+
+        private void Fase3()
+        {
+            fase3Ativa = true;
+
+            tempoFase3 = 20;
+
+            lblTempoFase3.Visible = true;
+            lblTempoFase3.Text = "Tempo: " + tempoFase3;
+
+            timerFase3.Start();
+
+            for (int i = 0; i < 10; i++)
             {
                 MakeZombies();
             }
@@ -640,5 +675,33 @@ namespace Shoot_Out_Game_MOO_ICT
             this.Focus();
         }
 
+        private void buttonFase3_Click(object sender, EventArgs e)
+        {
+            panelFase3.Visible = false;
+            player.Visible = true;
+
+            Fase3();
+
+            GameTimer.Start();
+
+            this.ActiveControl = null;
+            this.Focus();
+        }
+
+        private void timerFase3_Tick(object sender, EventArgs e)
+        {
+            tempoFase3--;
+
+            lblTempoFase3.Text = "Tempo: " + tempoFase3;
+
+            if (tempoFase3 <= 0)
+            {
+                timerFase3.Stop();
+
+                fase3Ativa = false;
+                GameTimer.Stop();
+                lblTempoFase3.Visible = false;
+            }
+        }
     }
 }

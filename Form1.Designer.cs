@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             GameTimer = new System.Windows.Forms.Timer(components);
             painelmenu = new Panel();
+            lblTempoFase3 = new Label();
             comojogar = new Button();
             iniciarjogo = new Button();
             titulomenu = new Label();
@@ -54,6 +55,10 @@
             txtAmmo = new Label();
             labelMensagemTeclaE = new Label();
             lblGameOver = new Label();
+            timerFase3 = new System.Windows.Forms.Timer(components);
+            panelFase3 = new Panel();
+            buttonFase3 = new Button();
+            labelFase3 = new Label();
             painelmenu.SuspendLayout();
             painelcomojogar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -61,6 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)imagemteclas).BeginInit();
             painelFase2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)player).BeginInit();
+            panelFase3.SuspendLayout();
             SuspendLayout();
             // 
             // GameTimer
@@ -72,6 +78,7 @@
             // 
             painelmenu.BackgroundImage = (Image)resources.GetObject("painelmenu.BackgroundImage");
             painelmenu.BorderStyle = BorderStyle.FixedSingle;
+            painelmenu.Controls.Add(lblTempoFase3);
             painelmenu.Controls.Add(comojogar);
             painelmenu.Controls.Add(iniciarjogo);
             painelmenu.Controls.Add(titulomenu);
@@ -80,6 +87,18 @@
             painelmenu.Name = "painelmenu";
             painelmenu.Size = new Size(1199, 974);
             painelmenu.TabIndex = 8;
+            // 
+            // lblTempoFase3
+            // 
+            lblTempoFase3.AutoSize = true;
+            lblTempoFase3.Font = new Font("Showcard Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTempoFase3.ForeColor = SystemColors.ButtonFace;
+            lblTempoFase3.Location = new Point(471, 53);
+            lblTempoFase3.Name = "lblTempoFase3";
+            lblTempoFase3.Size = new Size(129, 29);
+            lblTempoFase3.TabIndex = 18;
+            lblTempoFase3.Text = "Tempo: 20";
+            lblTempoFase3.Visible = false;
             // 
             // comojogar
             // 
@@ -341,6 +360,42 @@
             lblGameOver.Text = "Pressione enter para jogar novamente";
             lblGameOver.Visible = false;
             // 
+            // timerFase3
+            // 
+            timerFase3.Interval = 1000;
+            timerFase3.Tick += timerFase3_Tick;
+            // 
+            // panelFase3
+            // 
+            panelFase3.Controls.Add(buttonFase3);
+            panelFase3.Controls.Add(labelFase3);
+            panelFase3.Location = new Point(214, 273);
+            panelFase3.Name = "panelFase3";
+            panelFase3.Size = new Size(805, 471);
+            panelFase3.TabIndex = 28;
+            panelFase3.Visible = false;
+            // 
+            // buttonFase3
+            // 
+            buttonFase3.BackColor = Color.FromArgb(255, 128, 0);
+            buttonFase3.Location = new Point(270, 198);
+            buttonFase3.Name = "buttonFase3";
+            buttonFase3.Size = new Size(221, 84);
+            buttonFase3.TabIndex = 1;
+            buttonFase3.Text = "Continuar para fase 3";
+            buttonFase3.UseVisualStyleBackColor = false;
+            // 
+            // labelFase3
+            // 
+            labelFase3.AutoSize = true;
+            labelFase3.Font = new Font("Showcard Gothic", 22.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            labelFase3.ForeColor = Color.FromArgb(255, 128, 0);
+            labelFase3.Location = new Point(24, 61);
+            labelFase3.Name = "labelFase3";
+            labelFase3.Size = new Size(748, 46);
+            labelFase3.TabIndex = 0;
+            labelFase3.Text = "Parabéns você chegou no nível final!";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -348,15 +403,16 @@
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(1232, 1017);
             Controls.Add(healthBar);
+            Controls.Add(panelFase3);
             Controls.Add(lblGameOver);
             Controls.Add(label1);
             Controls.Add(txtScore);
             Controls.Add(txtAmmo);
-            Controls.Add(labelMensagemTeclaE);
-            Controls.Add(player);
             Controls.Add(painelFase2);
             Controls.Add(painelmenu);
             Controls.Add(painelcomojogar);
+            Controls.Add(labelMensagemTeclaE);
+            Controls.Add(player);
             Margin = new Padding(5);
             Name = "Form1";
             Text = "Zombie Shootout Game MOO ICT";
@@ -372,6 +428,8 @@
             painelFase2.ResumeLayout(false);
             painelFase2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)player).EndInit();
+            panelFase3.ResumeLayout(false);
+            panelFase3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
 
@@ -403,5 +461,10 @@
         private Label txtAmmo;
         private Label labelMensagemTeclaE;
         private Label lblGameOver;
+        private System.Windows.Forms.Timer timerFase3;
+        private Label lblTempoFase3;
+        private Panel panelFase3;
+        private Button buttonFase3;
+        private Label labelFase3;
     }
 }
