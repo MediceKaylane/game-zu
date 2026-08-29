@@ -31,9 +31,10 @@ namespace Shoot_Out_Game_MOO_ICT
         public Form1()
         {
             InitializeComponent();
-            RestartGame();
             painelFase2.Visible = false;
             txtArames.Visible = false;
+
+            painelcomojogar.Visible = false;
         }
 
 
@@ -582,11 +583,21 @@ namespace Shoot_Out_Game_MOO_ICT
         }
 
 
-        private void label2_Click(object sender, EventArgs e)
+        private void comojogar_Click(object sender, EventArgs e)
         {
+            painelmenu.Visible = false;
+            painelcomojogar.Visible = true;
 
+            GameTimer.Stop();
         }
 
+        private void botaovoltar_Click(object sender, EventArgs e)
+        {
+            painelcomojogar.Visible = false;
+            painelmenu.Visible = true;
+
+
+        }
 
         private void buttonContinuar_Click(object sender, EventArgs e)
         {
@@ -602,7 +613,22 @@ namespace Shoot_Out_Game_MOO_ICT
             this.Focus();
         }
 
+        private void iniciarjogo_Click(object sender, EventArgs e)
+        {
 
-        
+            painelmenu.Visible = false;
+
+            txtAmmo.Visible = true;
+            txtScore.Visible = true;
+            healthBar.Visible = true;
+            label1.Visible = true;
+            player.Visible = true;
+
+            RestartGame();
+
+            this.ActiveControl = null;
+            this.Focus();
+        }
+
     }
 }

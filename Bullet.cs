@@ -41,7 +41,7 @@ namespace Shoot_Out_Game_MOO_ICT
 
         }
 
-        private void BulletTimerEvent(object sender, EventArgs e)
+        private void BulletTimerEvent(object? sender, EventArgs e)
         {
 
             if (direction == "left")
