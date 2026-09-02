@@ -22,6 +22,8 @@ namespace Shoot_Out_Game_MOO_ICT
         int zombieSpeed = 3;
         int arames = 3;
         int tempoFase3 = 20;
+        int tentativas = 0;
+
 
         Random randNum = new Random();
         int score;
@@ -598,6 +600,8 @@ namespace Shoot_Out_Game_MOO_ICT
 
             player.Visible = true;
 
+            tentativas++;
+
 
             foreach (PictureBox i in zombiesList)
             {
@@ -710,7 +714,49 @@ namespace Shoot_Out_Game_MOO_ICT
                 fase3Ativa = false;
                 GameTimer.Stop();
                 lblTempoFase3.Visible = false;
+
+                player.Visible = false;
+
+                lblKillsFinal.Text = "Mortes: " + score;
+                lblTentativasFinal.Text = "Tentativas: " + (tentativas - 1);
+
+                panelRelatorioFinal.Visible = true;
+                panelRelatorioFinal.BringToFront();
             }
+        }
+
+        private void buttonVoltarMenu_Click(object sender, EventArgs e)
+        {
+            // esconde o relatório
+            panelRelatorioFinal.Visible = false;
+
+            // esconde tudo que pode ter ficado visível do jogo
+            player.Visible = false;
+            txtAmmo.Visible = false;
+            txtScore.Visible = false;
+            healthBar.Visible = false;
+            label1.Visible = false;
+            txtArames.Visible = false;
+            lblGameOver.Visible = false;
+            lblTempoFase3.Visible = false;
+            painelFase2.Visible = false;
+            panelFase3.Visible = false;
+
+            // remove zumbis e outros controles que possam ter sobrado na arena
+            foreach (PictureBox z in zombiesList)
+            {
+                this.Controls.Remove(z);
+                z.Dispose();
+            }
+            zombiesList.Clear();
+
+            // para timers que possam estar rodando
+            GameTimer.Stop();
+            timerFase3.Stop();
+
+            // volta pro menu principal
+            painelmenu.Visible = true;
+            painelmenu.BringToFront();
         }
     }
 }

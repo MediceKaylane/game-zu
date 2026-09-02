@@ -55,14 +55,20 @@
             lblGameOver = new Label();
             timerFase3 = new System.Windows.Forms.Timer(components);
             panelFase3 = new Panel();
-            buttonFase3 = new Button();
             labelFase3 = new Label();
+            buttonFase3 = new Button();
+            panelRelatorioFinal = new Panel();
+            buttonVoltarMenu = new Button();
+            lblTentativasFinal = new Label();
+            lblKillsFinal = new Label();
+            labelRelatorio = new Label();
             painelmenu.SuspendLayout();
             painelcomojogar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imagemteclas).BeginInit();
             painelFase2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)player).BeginInit();
             panelFase3.SuspendLayout();
+            panelRelatorioFinal.SuspendLayout();
             SuspendLayout();
             // 
             // GameTimer
@@ -220,7 +226,7 @@
             buttonContinuar.BackColor = SystemColors.ButtonFace;
             buttonContinuar.Font = new Font("Showcard Gothic", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             buttonContinuar.ForeColor = Color.DarkOrange;
-            buttonContinuar.Location = new Point(310, 296);
+            buttonContinuar.Location = new Point(310, 310);
             buttonContinuar.Margin = new Padding(3, 4, 3, 4);
             buttonContinuar.Name = "buttonContinuar";
             buttonContinuar.Size = new Size(173, 83);
@@ -234,11 +240,11 @@
             labelFase2Comacando.AutoSize = true;
             labelFase2Comacando.Font = new Font("Segoe UI", 18F, FontStyle.Italic, GraphicsUnit.Point, 0);
             labelFase2Comacando.ForeColor = Color.DarkOrange;
-            labelFase2Comacando.Location = new Point(219, 209);
+            labelFase2Comacando.Location = new Point(120, 209);
             labelFase2Comacando.Name = "labelFase2Comacando";
-            labelFase2Comacando.Size = new Size(359, 41);
+            labelFase2Comacando.Size = new Size(492, 82);
             labelFase2Comacando.TabIndex = 5;
-            labelFase2Comacando.Text = "A fase 2 está começando...";
+            labelFase2Comacando.Text = "A fase 2 está começando...\r\nMate 20 zumbis para passar de nível\r\n";
             // 
             // labelFase1Concluida
             // 
@@ -254,7 +260,7 @@
             // 
             // healthBar
             // 
-            healthBar.Location = new Point(846, 15);
+            healthBar.Location = new Point(890, 15);
             healthBar.Margin = new Padding(5);
             healthBar.Name = "healthBar";
             healthBar.Size = new Size(249, 35);
@@ -346,13 +352,25 @@
             // 
             // panelFase3
             // 
-            panelFase3.Controls.Add(buttonFase3);
+            panelFase3.BackColor = Color.WhiteSmoke;
             panelFase3.Controls.Add(labelFase3);
+            panelFase3.Controls.Add(buttonFase3);
             panelFase3.Location = new Point(214, 273);
             panelFase3.Name = "panelFase3";
             panelFase3.Size = new Size(805, 471);
             panelFase3.TabIndex = 28;
             panelFase3.Visible = false;
+            // 
+            // labelFase3
+            // 
+            labelFase3.AutoSize = true;
+            labelFase3.Font = new Font("Showcard Gothic", 22.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            labelFase3.ForeColor = Color.FromArgb(255, 128, 0);
+            labelFase3.Location = new Point(24, 61);
+            labelFase3.Name = "labelFase3";
+            labelFase3.Size = new Size(794, 92);
+            labelFase3.TabIndex = 0;
+            labelFase3.Text = "Você terá balas infinitas\r\nSobreviva a um ataque de zumbis em 20s \r\n";
             // 
             // buttonFase3
             // 
@@ -365,16 +383,63 @@
             buttonFase3.UseVisualStyleBackColor = false;
             buttonFase3.Click += buttonFase3_Click;
             // 
-            // labelFase3
+            // panelRelatorioFinal
             // 
-            labelFase3.AutoSize = true;
-            labelFase3.Font = new Font("Showcard Gothic", 22.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            labelFase3.ForeColor = Color.FromArgb(255, 128, 0);
-            labelFase3.Location = new Point(24, 61);
-            labelFase3.Name = "labelFase3";
-            labelFase3.Size = new Size(748, 46);
-            labelFase3.TabIndex = 0;
-            labelFase3.Text = "Parabéns você chegou no nível final!";
+            panelRelatorioFinal.Controls.Add(buttonVoltarMenu);
+            panelRelatorioFinal.Controls.Add(lblTentativasFinal);
+            panelRelatorioFinal.Controls.Add(lblKillsFinal);
+            panelRelatorioFinal.Controls.Add(labelRelatorio);
+            panelRelatorioFinal.Location = new Point(15, 7);
+            panelRelatorioFinal.Name = "panelRelatorioFinal";
+            panelRelatorioFinal.Size = new Size(1203, 993);
+            panelRelatorioFinal.TabIndex = 29;
+            panelRelatorioFinal.Visible = false;
+            // 
+            // buttonVoltarMenu
+            // 
+            buttonVoltarMenu.BackColor = Color.FromArgb(255, 128, 0);
+            buttonVoltarMenu.Font = new Font("Showcard Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buttonVoltarMenu.ForeColor = SystemColors.ButtonFace;
+            buttonVoltarMenu.Location = new Point(441, 478);
+            buttonVoltarMenu.Name = "buttonVoltarMenu";
+            buttonVoltarMenu.Size = new Size(272, 83);
+            buttonVoltarMenu.TabIndex = 3;
+            buttonVoltarMenu.Text = "Voltar ";
+            buttonVoltarMenu.UseVisualStyleBackColor = false;
+            buttonVoltarMenu.Click += buttonVoltarMenu_Click;
+            // 
+            // lblTentativasFinal
+            // 
+            lblTentativasFinal.AutoSize = true;
+            lblTentativasFinal.Font = new Font("Showcard Gothic", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTentativasFinal.ForeColor = SystemColors.ButtonFace;
+            lblTentativasFinal.Location = new Point(174, 286);
+            lblTentativasFinal.Name = "lblTentativasFinal";
+            lblTentativasFinal.Size = new Size(291, 46);
+            lblTentativasFinal.TabIndex = 2;
+            lblTentativasFinal.Text = "Tentativas: 0";
+            // 
+            // lblKillsFinal
+            // 
+            lblKillsFinal.AutoSize = true;
+            lblKillsFinal.Font = new Font("Showcard Gothic", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblKillsFinal.ForeColor = SystemColors.ButtonFace;
+            lblKillsFinal.Location = new Point(174, 202);
+            lblKillsFinal.Name = "lblKillsFinal";
+            lblKillsFinal.Size = new Size(216, 46);
+            lblKillsFinal.TabIndex = 1;
+            lblKillsFinal.Text = "Mortes: 0";
+            // 
+            // labelRelatorio
+            // 
+            labelRelatorio.AutoSize = true;
+            labelRelatorio.Font = new Font("Showcard Gothic", 48F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            labelRelatorio.ForeColor = Color.FromArgb(255, 128, 0);
+            labelRelatorio.Location = new Point(244, 39);
+            labelRelatorio.Name = "labelRelatorio";
+            labelRelatorio.Size = new Size(721, 98);
+            labelRelatorio.TabIndex = 0;
+            labelRelatorio.Text = "RELATÓRIO FINAL";
             // 
             // Form1
             // 
@@ -382,17 +447,18 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(1232, 1017);
-            Controls.Add(healthBar);
-            Controls.Add(panelFase3);
-            Controls.Add(lblGameOver);
-            Controls.Add(label1);
-            Controls.Add(txtScore);
-            Controls.Add(txtAmmo);
-            Controls.Add(painelFase2);
             Controls.Add(painelmenu);
             Controls.Add(painelcomojogar);
             Controls.Add(labelMensagemTeclaE);
             Controls.Add(player);
+            Controls.Add(txtAmmo);
+            Controls.Add(txtScore);
+            Controls.Add(label1);
+            Controls.Add(healthBar);
+            Controls.Add(lblGameOver);
+            Controls.Add(painelFase2);
+            Controls.Add(panelFase3);
+            Controls.Add(panelRelatorioFinal);
             Margin = new Padding(5);
             Name = "Form1";
             Text = "Zombie Shootout Game MOO ICT";
@@ -408,6 +474,8 @@
             ((System.ComponentModel.ISupportInitialize)player).EndInit();
             panelFase3.ResumeLayout(false);
             panelFase3.PerformLayout();
+            panelRelatorioFinal.ResumeLayout(false);
+            panelRelatorioFinal.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
 
@@ -442,5 +510,10 @@
         private Panel panelFase3;
         private Button buttonFase3;
         private Label labelFase3;
+        private Panel panelRelatorioFinal;
+        private Button buttonVoltarMenu;
+        private Label lblTentativasFinal;
+        private Label lblKillsFinal;
+        private Label labelRelatorio;
     }
 }
