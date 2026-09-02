@@ -13,7 +13,7 @@ namespace Shoot_Out_Game_MOO_ICT
         bool fase2Ativa = false;
 
         bool fase3Ativa = false;
-
+        int testegit = 1;
         string facing = "up";
 
         int playerHealth = 100;
