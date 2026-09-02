@@ -219,6 +219,15 @@ namespace Shoot_Out_Game_MOO_ICT
                                     zombie.Dispose();
                                 }
 
+                                foreach (Control item in this.Controls.Cast<Control>().ToList())
+                                {
+                                    if (item is PictureBox && (string)item.Tag == "vida")
+                                    {
+                                        this.Controls.Remove(item);
+                                        item.Dispose();
+                                    }
+                                }
+
                                 zombiesList.Clear();
 
                                 GameTimer.Stop();
@@ -430,32 +439,27 @@ namespace Shoot_Out_Game_MOO_ICT
 
 
         // DROPA VIDA
+        // C#
         private void DropVida()
         {
             PictureBox vida = new PictureBox();
-
             vida.Tag = "vida";
-
             vida.Image = Properties.Resources.coracao;
-
             vida.Size = new Size(40, 40);
-
             vida.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            int minX = 10;
+            int maxX = this.ClientSize.Width - vida.Width;
+            int x = randNum.Next(minX, Math.Max(minX, maxX));
 
-            vida.Left = randNum.Next(
-                10,
-                this.ClientSize.Width - vida.Width
-            );
+            int minY = 60;
+            int maxY = this.ClientSize.Height - vida.Height;
+            int y = randNum.Next(minY, Math.Max(minY, maxY));
 
-            vida.Top = randNum.Next(
-                60,
-                this.ClientSize.Height - vida.Height
-            );
-
+            vida.Left = x;
+            vida.Top = y;
 
             this.Controls.Add(vida);
-
             vida.BringToFront();
             player.BringToFront();
         }
